@@ -1,0 +1,2 @@
+cta_main_image.jpg:
+    Photo by <a href="https://unsplash.com/@icons8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Icons8 Team</a> on <a href="https://unsplash.com/photos/woman-wearing-white-towel-y2T5hT7pWx4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
