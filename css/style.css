@@ -3,4 +3,138 @@
     --main-color-bright: #E11299;
     --main-color-neutral: #FFEAEA;
     --main-color-light: #F5C6EC;
+    --black: #1d1d1d;
+    --white: #fffcff;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    background-color: var(--white);
+    font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+header {
+    background-color: var(--black);
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+header, header section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+header h1 {
+    color: var(--main-color-bright);
+    margin-left: 10px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+}
+
+header nav {
+    position: absolute;
+    top: 72px;
+    width: 100%;
+    background-color: var(--main-color-light);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+header nav ul {
+    display: none;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+header nav ul li {
+    width: 100%;
+    padding: 20px 0px;
+}
+
+header nav ul li:hover {
+    background-color: var(--main-color-dark);
+}
+
+header nav ul li:hover a {
+    color: var(--main-color-light);
+}
+
+header nav ul li a {
+    color: var(--main-color-dark);
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    margin-right: 10px;
+}
+
+.hamburger .material-symbols-outlined {
+    font-size: 3.5em;
+    color: var(--main-color-light);
+}
+
+main {
+    margin-top: 72px;
+}
+
+#hero {
+    background-image: url("../img/cta_main_image_4.jpg");
+    background-size: cover;
+    padding: 50px;
+    text-align: center;
+}
+
+#hero h2 {
+    font-size: 12vw;
+    color: var(--main-color-neutral);
+    text-shadow: 2px 2px 2px var(--main-color-bright);
+}
+
+#hero p {
+    color: var(--main-color-neutral);
+    font-size: 15px;
+    text-shadow: 2px 2px 2px var(--black);
+}
+
+#hero button {
+    background: linear-gradient(45deg, var(--main-color-dark) 0%, var(--main-color-bright) 40%, var(--main-color-bright) 60%, var(--main-color-dark) 100%);
+    border: 2px solid var(--main-color-dark);
+    border-radius: 2px;
+    padding: 10px 30px 10px 30px;
+    width: 175px;
+    margin: 30px 10px;
+}
+
+#hero button:hover {
+    background: none;
+    border-color: var(--main-color-bright);
+}
+
+#hero button a {
+    text-decoration: none;
+    color: var(--main-color-neutral);
+    font-family: 'Raleway', sans-serif;
+    /*font-family: 'Playfair Display', serif;*/
+    font-size: 18px;
+    font-weight: 700;
 }
