@@ -1,2 +1,13 @@
 cta_main_image.jpg:
     Photo by <a href="https://unsplash.com/@icons8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Icons8 Team</a> on <a href="https://unsplash.com/photos/woman-wearing-white-towel-y2T5hT7pWx4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+cta_main_image_2.jpg:
+    Photo by <a href="https://unsplash.com/@element5digital?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Element5 Digital</a> on <a href="https://unsplash.com/photos/woman-in-white-long-sleeved-shirt-standing-in-front-of-pink-wall-WCPg9ROZbM0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+cta_main_image_4:
+    Photo by <a href="https://unsplash.com/@krivitskiy?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Alexander Krivitskiy</a> on <a href="https://unsplash.com/photos/grayscale-photography-of-womans-face-8gGUMSQQz0E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+
+logo.png:
+    <a href="https://www.flaticon.com/free-icons/woman" title="woman icons">Woman icons created by Freepik - Flaticon</a>
+
