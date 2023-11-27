@@ -138,3 +138,74 @@ main {
     font-size: 18px;
     font-weight: 700;
 }
+
+
+/* Calendar styling */
+#contact .calendar {
+    background-color: #1d1d1d;
+    color: var(--white);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#contact .calendar ul{
+    list-style: none;
+    padding: 0;
+}
+#contact .calendar ul.month {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+#contact .calendar .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    text-align: center;
+}
+#contact .calendar ul.days li{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#contact .calendar ul.days li.day:hover {
+    background-color: var(--main-color-bright);
+    cursor: pointer;
+}
+
+/* Hours settings */
+#contact .calendar ul.hours {
+    /*display: none;*/
+}
+#contact .calendar ul.hours h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+#contact .calendar ul.hours li button {
+    margin: 5px;
+    cursor: pointer;
+    background: none;
+    color: var(--white);
+    border: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+#contact .calendar ul.hours li button:hover {
+    background-color: #3f3f3f;
+}
+#contact .calendar ul.hours li button:focus {
+    border: 1px solid var(--main-color-bright);
+}
+#contact .calendar ul.hours .reserved {
+    pointer-events: none;
+    color: rgb(150, 150, 150);
+    text-decoration:line-through;
+}
