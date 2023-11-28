@@ -1,6 +1,6 @@
 import database from "./database.js";
 
-const calendar = document.querySelector(".calendar")
+const calendar = document.querySelector(".calendar");
 const months = {
     0: "January",
     1: "February",
@@ -13,8 +13,8 @@ const months = {
     8: "September",
     9: "October",
     10: "November",
-    11: "December"
-}
+    11: "December",
+};
 const weekdays = {
     1: "monday",
     2: "tuesday",
@@ -22,129 +22,183 @@ const weekdays = {
     4: "thursday",
     5: "friday",
     6: "saturday",
-    0: "sunday"
-}
-const date = new Date()
-const currentDay = date.getDate()
-const currentMonth = date.getMonth()
-const currentYear = date.getFullYear()
-const currentWeekDay = date.getDay()
-const daysInCurrentMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
-const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay()
+    7: "sunday",
+};
+const today = new Date();
 
-console.log('Current Date:', date);
-console.log('Current Day:', currentDay);
-console.log('Current Month:', currentMonth + 1); // Adding 1 to match human-readable month numbering
-console.log('Current Year:', currentYear);
-console.log('Current Weekday:', currentWeekDay, weekdays[currentWeekDay]); // 0 is Sunday, 1 is Monday, ..., 6 is Saturday
-console.log('Days in Current Month:', daysInCurrentMonth);
-console.log('First Day of Month:', firstDayOfMonth, weekdays[firstDayOfMonth]);
+let [currentDay, currentMonth, currentYear] = [null, null, null];
+let [daysInCurrentMonth, firstDayOfMonth] = [null, null];
 
-function changeCurrentMonth() {
-    console.log()
+let [selectedDay, selectedHour] = [null, null];
+
+function setCurrentMonth(monthChange) {
+    let currentDate = null;
+    if (monthChange === 0) {
+        currentDate = new Date();
+    } else {
+        currentDate = new Date(currentYear, currentMonth + monthChange, 1);
+    }
+
+    if (currentDate.getMonth() === today.getMonth()) {
+        currentDate = today;
+    }
+    console.log(currentDate);
+
+    currentDay = currentDate.getDate();
+    currentMonth = currentDate.getMonth();
+    currentYear = currentDate.getFullYear();
+    daysInCurrentMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+    if (firstDayOfMonth === 0) {
+        firstDayOfMonth = 7;
+    }
+
+    const month = calendar.querySelector("section.month");
+    const current = month.querySelector("p.current");
+    current.innerHTML = months[currentMonth];
+
+    const prev = calendar.querySelector("button.prev");
+    prev.addEventListener("click", handlePrevMonthClick);
+
+    const next = calendar.querySelector("button.next");
+    next.addEventListener("click", handleNextMonthClick);
+
+    setDays();
 }
 
 function handleDayClick(e) {
-    console.log("Clicked day: ", e.target.value, "month: ", currentMonth, "year: ", currentYear)
-    showHours(e.target.value, currentMonth, currentYear)
+    const days = document.querySelector("section.days");
+    days.querySelectorAll(".day").forEach((day) => {
+        day.classList.remove("selected");
+    });
+    e.target.classList.add("selected");
+    selectedDay = `${currentYear}-${currentMonth + 1}-${e.target.value}`;
+
+    showHours(e.target.value, currentMonth, currentYear);
 }
 
 function handleHourClick(e) {
-    console.log("hour clicked", e.target.value)
+    const hours = calendar.querySelector("section.hours");
+    hours.querySelectorAll(".hour").forEach((hour) => {
+        hour.classList.remove("selected");
+    });
+    e.target.classList.add("selected");
+    selectedHour = formatHour(e.target.value);
+}
+
+function handleSubmitClick(e) {
+    if (selectedDay != "" && selectedHour != "") {
+        console.log(selectedDay, selectedHour);
+        database.saveReservation(selectedDay, selectedHour);
+    } else {
+        console.log("Not selected");
+    }
+}
+
+function handlePrevMonthClick(e) {
+    console.log("prev");
+    setCurrentMonth(-1);
+}
+
+function handleNextMonthClick(e) {
+    console.log("next");
+    setCurrentMonth(1);
 }
 
 function formatHour(hour) {
     if (hour < 10) {
-        return `0${hour}:00`
+        return `0${hour}:00`;
     } else {
-        return `${hour}:00`
+        return `${hour}:00`;
     }
 }
 
+function showSubmitButton() {
+    const submitButton = calendar.querySelector("button.submit");
+    submitButton.style.display = "block";
+    submitButton.addEventListener("click", handleSubmitClick);
+}
+
 async function showHours(day, month, year) {
-    const hours = calendar.querySelector("ul.hours")
+    const hours = calendar.querySelector("section.hours");
 
     const openingHours = await database.getOpeningHours(day, month, year);
 
-    let [start, end] = []
-    const dayString = `${year}-${month+1}-${day}`
+    let [start, end] = [];
+    const dayString = `${year}-${month + 1}-${day}`;
 
     // Check if there are exception opening hours for the day
     // if not use default hours
     if (dayString in openingHours.exceptions) {
-        start = openingHours.exceptions[dayString].start
-        end = openingHours.exceptions[dayString].end
+        start = openingHours.exceptions[dayString].start;
+        end = openingHours.exceptions[dayString].end;
     } else {
-        const dayNumber = new Date(year, month, day).getDay()
-        const weekdayStr = weekdays[dayNumber]
-        start = openingHours.default[weekdayStr].start
-        end = openingHours.default[weekdayStr].end
+        const dayNumber = new Date(year, month, day).getDay();
+        const weekdayStr = weekdays[dayNumber];
+        openingHours.default.forEach((hour) => {
+            if (hour.day.toLowerCase() === weekdayStr) {
+                start = hour.start_time;
+                end = hour.end_time;
+            }
+        });
     }
 
     hours.innerHTML = "";
-    const reservations = await database.getReservations(dayString)
-    const heading = document.createElement("h1")
-    heading.innerHTML = "Select time"
-    hours.append(heading)
-    for (let i = parseInt(start); i<parseInt(end); i++) {
-
+    const reservations = await database.getReservations(dayString);
+    for (let i = parseInt(start); i < parseInt(end); i++) {
         // Create new element with the hours
-        const newHourItem = document.createElement("li")
-        const newHourButton = document.createElement("button")
-        newHourButton.innerHTML = `${i}:00 - ${i+1}:00`
-        newHourButton.value = i
+        const newHourButton = document.createElement("button");
+        newHourButton.innerHTML = `${i}:00 - ${i + 1}:00`;
+        newHourButton.value = i;
 
         // Add class names, add "reserved" tag if reserved
-        newHourItem.classList.add("hour")
+        newHourButton.classList.add("hour");
         if (reservations != null) {
             const hour = formatHour(i);
             if (reservations.includes(hour)) {
-                newHourButton.classList.add("reserved")
-                newHourItem.classList.add("reserved")
+                newHourButton.classList.add("reserved");
             }
         }
-        newHourButton.addEventListener("click", handleHourClick)
-        newHourItem.append(newHourButton)
-        hours.append(newHourItem)
+        newHourButton.addEventListener("click", handleHourClick);
+        hours.append(newHourButton);
     }
-    hours.style.display = "block";
+    hours.style.display = "flex";
+    showSubmitButton();
 }
 
 function setDays() {
-    const days = calendar.querySelector("ul.days")
-    let [row, col] = [2, firstDayOfMonth]
+    const days = calendar.querySelector("section.days");
+    let [row, col] = [1, firstDayOfMonth];
+    console.log(firstDayOfMonth);
 
-    for (let i=0; i<daysInCurrentMonth; i++) {
-        const newDayItem = document.createElement("li")
-        newDayItem.innerHTML = i+1
-        newDayItem.value = i+1
-        newDayItem.classList.add("day")
+    days.innerHTML = "";
+    for (let i = 1; i <= daysInCurrentMonth; i++) {
+        const tempDate = new Date(currentYear, currentMonth, i + 1);
+
+        const newDayItem = document.createElement("button");
+        newDayItem.innerHTML = i;
+        newDayItem.value = i;
+
+        // Check if passed today
+        if (tempDate < today) {
+            newDayItem.classList.add("past");
+        }
+        newDayItem.classList.add("day");
 
         // Setting the days to match weekdays
-        newDayItem.style.gridRow = `${row} / ${row+1}`
-        newDayItem.style.gridColumn= `${col} / ${col+1}`
-        newDayItem.addEventListener("click", handleDayClick)
+        newDayItem.style.gridRow = `${row} / ${row + 1}`;
+        newDayItem.style.gridColumn = `${col} / ${col + 1}`;
+        console.log("day", i, "row", row, "col", col);
+        newDayItem.addEventListener("click", handleDayClick);
 
         if (col === 7) {
-            col = 1
-            row += 1
+            col = 1;
+            row += 1;
         } else {
-            col += 1
+            col += 1;
         }
-        days.append(newDayItem)
+        days.append(newDayItem);
     }
 }
 
-function setMonth() {
-    const month = calendar.querySelector("ul.month")
-    const current = month.querySelector("li.current")
-    current.innerHTML = months[currentMonth]
-}
-
-function formCalendar() {
-    setMonth()
-    setDays()
-}
-
-formCalendar()
-showHours(currentYear, currentMonth, currentDay) // FOR DEVELOPMENT
+setCurrentMonth(0);

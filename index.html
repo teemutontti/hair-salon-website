@@ -1,91 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Hair Salon</title>
-</head>
-<body>
-    <header>
-        <section>
-            <img src="img/logo_inverted.png" alt="hair logo" width="50px" height="50px">
-            <h1>Hair Salon</h1>
-        </section>
-        <button class="hamburger" id="menu-button"><span class="material-symbols-outlined">menu</span></button>
-        <nav>
-            <ul id="links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="hero">
-            <h2>Ready for a New Look?</h2>
-            <p>We take pride in our reputation for creating beautiful and unforgettable hairstyles. Our clients leave our salon with smiles and condifence. You can be the next to experience our expertise. Schedule your appointment with us and let's make your hair goals a reality.</p>
-            <button><a href="#contact">Book Now!</a></button>
-        </section>
-        <section id="about">
-            <h2>ABOUT</h2>
-            <p>Hey, I'm just graduated hairdresser with a fresh new look about the hair industry.</p>
-            <!--TODO: Add about-->
-            <section id="gallery">
-                <h3>GALLERY</h3>
-                <!--TODO: Add gallery-->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+        <title>Hair Salon</title>
+    </head>
+    <body>
+        <header>
+            <section>
+                <img src="img/logo_inverted.png" alt="hair logo" width="50px" height="50px" />
+                <h1>Hair Salon</h1>
             </section>
-            <section id="reviews" style="display: none;">
-                <h3>REVIEWS</h3>
-                <!--TODO: Add template for reviews (don't show on page)-->
+            <button class="hamburger" id="menu-button"><span class="material-symbols-outlined">menu</span></button>
+            <nav>
+                <ul id="links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="hero">
+                <h2>Ready for a New Look?</h2>
+                <p>
+                    Want to be the next to experience our hair expertise. Schedule your appointment with us now and let's make
+                    your hair goals a reality.
+                </p>
+                <button><a href="#contact">Book Now!</a></button>
             </section>
-        </section>
-        <section id="services">
-            <h2>SERVICES</h2>
-            <!--TODO: Add services-->
-        </section>
-        <section id="contact">
-            <h2>CONTACT</h2>
-            <div class="calendar">
-                <ul class="month">
-                    <li class="prev">&#10094;</li>
-                    <li class="current"></li>
-                    <li class="next">&#10095;</li>
-                </ul>
-                <ul class="days grid">
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
-                    <li>Sat</li>
-                    <li>Sun</li>
-                </ul>
-                <ul class="hours grid">
-                </ul>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <section>
-            <h2>CONTACT INFO</h2>
-            <!--TODO: Add contact info-->
-        </section>
-        <section>
-            <h2>SOCIAL MEDIA</h2>
-            <!--TODO: Add social media links-->
-        </section>
-        <section>
-            <h2>COPYRIGHT</h2>
-            <!--TODO: Add copyright-->
-        </section>
-    </footer>
-    <script src="scripts/index.js"></script>
-    <script src="scripts/calendar.js" type="module"></script>
-</body>
+            <section id="about">
+                <h2>ABOUT</h2>
+                <p>Hey, I'm just graduated hairdresser with a fresh new look about the hair industry.</p>
+                <p>
+                    We take pride in our reputation for creating beautiful and unforgettable hairstyles. Our clients leave our
+                    salon with smiles and condifence.
+                </p>
+                <!--TODO: Add about-->
+                <section id="gallery">
+                    <h3>GALLERY</h3>
+                    <!--TODO: Add gallery-->
+                </section>
+                <section id="reviews" style="display: none">
+                    <h3>REVIEWS</h3>
+                    <!--TODO: Add template for reviews (don't show on page)-->
+                </section>
+            </section>
+            <section id="services">
+                <h2>SERVICES</h2>
+                <!--TODO: Add services-->
+            </section>
+            <section id="contact">
+                <h2>CONTACT</h2>
+                <section class="calendar">
+                    <h3>Schedule your appointment</h3>
+                    <section class="month">
+                        <button class="prev">&#10094;</button>
+                        <p class="current"></p>
+                        <button class="next">&#10095;</button>
+                    </section>
+                    <section class="weekdays">
+                        <p>Mon</p>
+                        <p>Tue</p>
+                        <p>Wed</p>
+                        <p>Thu</p>
+                        <p>Fri</p>
+                        <p>Sat</p>
+                        <p>Sun</p>
+                    </section>
+                    <section class="days"></section>
+                    <section class="hours"></section>
+                    <button class="submit">Book</button>
+                </section>
+            </section>
+        </main>
+        <footer>
+            <section>
+                <h2>CONTACT INFO</h2>
+                <!--TODO: Add contact info-->
+            </section>
+            <section>
+                <h2>SOCIAL MEDIA</h2>
+                <!--TODO: Add social media links-->
+            </section>
+            <section>
+                <h2>COPYRIGHT</h2>
+                <!--TODO: Add copyright-->
+            </section>
+        </footer>
+        <script src="scripts/index.js"></script>
+        <script src="scripts/calendar.js" type="module"></script>
+    </body>
 </html>

@@ -1,21 +1,27 @@
 :root {
-    --main-color-dark: #9A208C;
-    --main-color-bright: #E11299;
-    --main-color-neutral: #FFEAEA;
-    --main-color-light: #F5C6EC;
+    --main-color-dark: #9a208c;
+    --main-color-bright: #e11299;
+    --main-color-neutral: #ffeaea;
+    --main-color-light: #f5c6ec;
     --black: #1d1d1d;
     --white: #fffcff;
+    --gray: rgb(150, 150, 150);
 }
 
 body {
     margin: 0;
     width: 100%;
     background-color: var(--white);
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Playfair Display", serif;
 }
 
 header {
@@ -26,7 +32,8 @@ header {
     width: 100%;
 }
 
-header, header section{
+header,
+header section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -117,7 +124,13 @@ main {
 }
 
 #hero button {
-    background: linear-gradient(45deg, var(--main-color-dark) 0%, var(--main-color-bright) 40%, var(--main-color-bright) 60%, var(--main-color-dark) 100%);
+    background: linear-gradient(
+        45deg,
+        var(--main-color-dark) 0%,
+        var(--main-color-bright) 40%,
+        var(--main-color-bright) 60%,
+        var(--main-color-dark) 100%
+    );
     border: 2px solid var(--main-color-dark);
     border-radius: 2px;
     padding: 10px 30px 10px 30px;
@@ -133,12 +146,11 @@ main {
 #hero button a {
     text-decoration: none;
     color: var(--main-color-neutral);
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     /*font-family: 'Playfair Display', serif;*/
     font-size: 18px;
     font-weight: 700;
 }
-
 
 /* Calendar styling */
 #contact .calendar {
@@ -150,62 +162,102 @@ main {
     justify-content: center;
     align-items: center;
 }
-#contact .calendar ul{
-    list-style: none;
-    padding: 0;
-}
-#contact .calendar ul.month {
+#contact .calendar .month {
     display: flex;
     gap: 20px;
     align-items: center;
     justify-content: center;
+    color: var(--main-color-light);
 }
-#contact .calendar .grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+#contact .calendar .month button.prev,
+#contact .calendar .month button.next {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--main-color-light);
+}
+#contact .calendar .month p.current {
+    font-weight: 600;
+    font-size: 18px;
+    width: 150px;
     text-align: center;
 }
-#contact .calendar ul.days li{
-    height: 40px;
-    width: 40px;
+#contact .calendar .weekdays,
+#contact .calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+#contact .calendar .days {
+    grid-template-rows: repeat(6, 1fr);
+}
+#contact .calendar .weekdays p,
+#contact .calendar .days .day {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-#contact .calendar ul.days li.day:hover {
-    background-color: var(--main-color-bright);
-    cursor: pointer;
+    margin: 0;
+    height: 40px;
+    width: 40px;
 }
 
 /* Hours settings */
-#contact .calendar ul.hours {
-    /*display: none;*/
+#contact .calendar .hours {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px;
 }
-#contact .calendar ul.hours h1 {
-    font-family: 'Raleway', sans-serif;
+#contact .calendar .hours h1 {
+    font-family: "Raleway", sans-serif;
     font-size: 18px;
     font-weight: 600;
 }
-#contact .calendar ul.hours li button {
-    margin: 5px;
+#contact .calendar .hours button {
+    padding: 8px 10px;
+}
+#contact .calendar ul.hours li button:hover {
+    border-color: var(--main-color-light);
+    color: var(--main-color-light);
+}
+#contact .calendar button.submit {
+    display: none;
+    background-color: var(--main-color-bright);
+    color: var(--white);
+    padding: 10px 30px;
+    font-family: "Raleway", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid var(--white);
+    border-radius: 5px;
+    margin-top: 20px;
+}
+#contact .calendar button.submit:hover {
+    background: none;
+}
+
+#contact .calendar .days button.day,
+#contact .calendar .hours button.hour {
     cursor: pointer;
     background: none;
     color: var(--white);
     border: none;
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     font-size: 15px;
     border-radius: 5px;
-    padding: 5px 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
 }
-#contact .calendar ul.hours li button:hover {
-    background-color: #3f3f3f;
-}
-#contact .calendar ul.hours li button:focus {
-    border: 1px solid var(--main-color-bright);
-}
-#contact .calendar ul.hours .reserved {
+#contact .calendar .days button.past,
+#contact .calendar .hours button.reserved {
+    text-decoration: line-through;
+    color: var(--gray);
     pointer-events: none;
-    color: rgb(150, 150, 150);
-    text-decoration:line-through;
+}
+#contact .calendar .days .day:hover,
+#contact .calendar .hours .hour:hover,
+#contact .calendar .days .day.selected,
+#contact .calendar .hours .hour.selected {
+    border-color: var(--main-color-light);
+    color: var(--main-color-light);
+    cursor: pointer;
 }
