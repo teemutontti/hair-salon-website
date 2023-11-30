@@ -1,18 +1,28 @@
-const development = true;
+const development = false;
 
 const database = {
     getOpeningHours: async (day, month, year) => {
-        const dRes = await fetch(development ? "http://localhost:8080/schedule/default" : "/schedule/default");
+        const dRes = await fetch(
+            development
+                ? "http://localhost:8080/schedule/default"
+                : "https://hair-salon-website-backend.onrender.com/schedule/default"
+        );
         const dSchedule = await dRes.json();
 
-        const eRes = await fetch(development ? "http://localhost:8080/schedule/exception" : "/schedule/exception");
+        const eRes = await fetch(
+            development
+                ? "http://localhost:8080/schedule/exception"
+                : "https://hair-salon-website-backend.onrender.com/schedule/exception"
+        );
         const eSchedule = await eRes.json();
 
         console.log({ default: dSchedule, exceptions: eSchedule });
         return { default: dSchedule, exceptions: eSchedule };
     },
     getReservations: async (dayStr) => {
-        const request = await fetch(development ? "http://localhost:8080/reservations" : "/reservations");
+        const request = await fetch(
+            development ? "http://localhost:8080/reservations" : "https://hair-salon-website-backend.onrender.com/reservations"
+        );
         const data = await request.json();
 
         const reservations = [];
@@ -29,13 +39,16 @@ const database = {
             date: dayStr,
             time: hourStr,
         };
-        const request = await fetch(development ? "http://localhost:8080/reservations" : "/reservations", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(reqBody),
-        });
+        const request = await fetch(
+            development ? "http://localhost:8080/reservations" : "https://hair-salon-website-backend.onrender.com/reservations",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(reqBody),
+            }
+        );
         console.log("reqBody: ", reqBody);
     },
 };
