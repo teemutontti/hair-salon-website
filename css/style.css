@@ -6,22 +6,44 @@
     --black: #1d1d1d;
     --white: #fffcff;
     --gray: rgb(150, 150, 150);
+
+    font-size: 16px;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
 }
 
 body {
-    margin: 0;
-    width: 100%;
     background-color: var(--white);
+    font-family: "Raleway", sans-serif;
+
+}
+
+h1 {
+    font-family: "Playfair Display", serif;
+}
+
+h2, h3, h4, h5, h6 {
     font-family: "Raleway", sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Playfair Display", serif;
+img {
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+#hero, #services, #gallery, #reviews, #about, #book {
+    text-align: center;
 }
 
 header {
@@ -34,93 +56,94 @@ header {
 
 header,
 header section {
+    align-items: center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
 }
 
-header img {
-    width: 40px;
-    height: 40px;
-    margin-left: 10px;
+.logo {
+    height: 3rem;
+    margin-left: 0.5rem;
+    width: 3rem;
 }
 
-header h1 {
+.name {
     color: var(--main-color-bright);
-    margin-left: 10px;
+    margin-left: 0.5rem;
 }
 
-header nav ul li a {
+.nav-link {
     text-decoration: none;
 }
 
 header nav {
-    position: absolute;
-    top: 72px;
-    width: 100%;
     background-color: var(--main-color-light);
     display: flex;
     justify-content: center;
+    position: absolute;
     text-align: center;
+    top: 4.4rem;
+    width: 100%;
 }
 
-header nav ul {
+#nav-links {
     display: none;
     list-style: none;
     padding: 0;
     width: 100%;
+    margin: 0;
 }
 
-header nav ul li {
+#nav-links li {
+    padding: 1.2rem 0rem;
     width: 100%;
-    padding: 20px 0px;
 }
 
-header nav ul li:hover {
+#nav-links li:hover {
     background-color: var(--main-color-dark);
 }
 
-header nav ul li:hover a {
+#nav-links li:hover a {
     color: var(--main-color-light);
 }
 
-header nav ul li a {
+#nav-links li a {
     color: var(--main-color-dark);
 }
 
 .hamburger {
     background: none;
     border: none;
-    margin-right: 10px;
+    margin-right: 0.5rem;
 }
 
 .hamburger .material-symbols-outlined {
-    font-size: 3.5em;
     color: var(--main-color-light);
+    font-size: 3rem;
 }
 
 main {
-    margin-top: 72px;
+    margin-top: 4rem;
 }
 
 #hero {
     background-image: url("../img/cta_main_image_4.jpg");
     background-size: cover;
-    padding: 50px;
-    text-align: center;
+    padding: 2rem;
+
 }
 
 #hero h2 {
-    font-size: 12vw;
     color: var(--main-color-neutral);
-    text-shadow: 2px 2px 2px var(--main-color-bright);
+    font-size: 3rem;
+    text-shadow: 0.15rem 0.15rem 0.15rem var(--main-color-bright);
 }
 
 #hero p {
     color: var(--main-color-neutral);
-    font-size: 15px;
-    text-shadow: 2px 2px 2px var(--black);
+    font-size: 1rem;
+    text-shadow: 0.15rem 0.15rem 0.15rem var(--black);
 }
 
 #hero button {
@@ -131,11 +154,11 @@ main {
         var(--main-color-bright) 60%,
         var(--main-color-dark) 100%
     );
-    border: 2px solid var(--main-color-dark);
-    border-radius: 2px;
-    padding: 10px 30px 10px 30px;
-    width: 175px;
-    margin: 30px 10px;
+    border-radius: 0.2rem;
+    border: 0.1rem solid var(--main-color-dark);
+    margin: 1rem 2rem;
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    width: 9rem;
 }
 
 #hero button:hover {
@@ -144,120 +167,169 @@ main {
 }
 
 #hero button a {
-    text-decoration: none;
     color: var(--main-color-neutral);
     font-family: "Raleway", sans-serif;
-    /*font-family: 'Playfair Display', serif;*/
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: 700;
+    text-decoration: none;
 }
 
-/* Calendar styling */
-#contact .calendar {
-    background-color: #1d1d1d;
+#book {
+    background-color: var(--black);
+    padding: 2rem;
+
+}
+#book .heading {
+    color: var(--white)
+}
+.calendar {
+    align-items: center;
     color: var(--white);
-    padding: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 0;
 }
-#contact .calendar .month {
-    display: flex;
-    gap: 20px;
+.month {
     align-items: center;
-    justify-content: center;
     color: var(--main-color-light);
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
-#contact .calendar .month button.prev,
-#contact .calendar .month button.next {
-    cursor: pointer;
+.month .prev, .month .next {
     background: none;
     border: none;
     color: var(--main-color-light);
+    cursor: pointer;
 }
-#contact .calendar .month p.current {
+.month p.current {
+    font-size: 1rem;
     font-weight: 600;
-    font-size: 18px;
-    width: 150px;
-    text-align: center;
+    width: 5rem;
 }
-#contact .calendar .weekdays,
-#contact .calendar .days {
+.weekdays, .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 }
-#contact .calendar .days {
+.days {
     grid-template-rows: repeat(6, 1fr);
 }
-#contact .calendar .weekdays p,
-#contact .calendar .days .day {
-    display: flex;
+.weekdays p, .day {
     align-items: center;
+    display: flex;
+    height: 2.2rem;
     justify-content: center;
     margin: 0;
-    height: 40px;
-    width: 40px;
+    width: 2.2rem;
 }
 
-/* Hours settings */
-#contact .calendar .hours {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 20px;
+.calendar .loading {
+    display: none;
 }
-#contact .calendar .hours h1 {
+.hours {
+    align-items: center;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0.5rem;
+}
+.hours h1 {
     font-family: "Raleway", sans-serif;
-    font-size: 18px;
+    font-size: 2rem;
     font-weight: 600;
 }
-#contact .calendar .hours button {
-    padding: 8px 10px;
+.hour {
+    padding: 0.4rem 0.6rem;
+    width: 7.5rem;
 }
-#contact .calendar ul.hours li button:hover {
+.hour:hover {
     border-color: var(--main-color-light);
     color: var(--main-color-light);
 }
-#contact .calendar button.submit {
-    display: none;
+.calendar .submit {
     background-color: var(--main-color-bright);
+    border-radius: 0.3rem;
+    border: 0.1rem solid var(--white);
     color: var(--white);
-    padding: 10px 30px;
+    display: none;
     font-family: "Raleway", sans-serif;
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: 700;
-    border: 1px solid var(--white);
-    border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 2rem;
+    padding: 0.5rem 2rem;
 }
-#contact .calendar button.submit:hover {
+.calendar .submit:hover {
     background: none;
 }
 
-#contact .calendar .days button.day,
-#contact .calendar .hours button.hour {
-    cursor: pointer;
+.day, .hour {
     background: none;
+    border-radius: 0.5rem;
+    border: 0.1rem solid rgba(0, 0, 0, 0);
     color: var(--white);
-    border: none;
+    cursor: pointer;
     font-family: "Raleway", sans-serif;
-    font-size: 15px;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0);
+    font-size: 1rem;
 }
-#contact .calendar .days button.past,
-#contact .calendar .hours button.reserved {
-    text-decoration: line-through;
+.days .past, .hours .reserved {
     color: var(--gray);
     pointer-events: none;
+    text-decoration: line-through;
 }
-#contact .calendar .days .day:hover,
-#contact .calendar .hours .hour:hover,
-#contact .calendar .days .day.selected,
-#contact .calendar .hours .hour.selected {
-    border-color: var(--main-color-light);
+.day:hover, .hour:hover, .day.selected, .hour.selected {
+    border: 0.1rem solid var(--main-color-light);
     color: var(--main-color-light);
     cursor: pointer;
+}
+
+#gallery {
+    background-color: var(--black);
+    color: var(--white);
+    margin: 0rem;
+    padding: 1.5rem;
+}
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.gallery-container img {
+    max-width: 10rem;
+    height: auto;
+    margin: 1rem;
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+}
+
+#services {
+    margin: 3rem;
+}
+#services h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 4rem 0rem;
+    color: var(--main-color-dark);
+}
+.service-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3.5rem;
+}
+.service img {
+    width: 5rem;
+}
+.service h3 {
+    color: var(--black);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+#about {
+
 }

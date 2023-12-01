@@ -2,7 +2,7 @@
 const menuButton = document.getElementById("menu-button");
 menuButton.addEventListener("click", () => {
     const icon = menuButton.querySelector(".material-symbols-outlined");
-    const links = document.getElementById("links");
+    const links = document.getElementById("nav-links");
     if (icon.innerHTML == "menu") {
         icon.innerHTML = "close";
         links.style.display = "block";
@@ -11,5 +11,4 @@ menuButton.addEventListener("click", () => {
         links.style.display = "none";
     }
 });
-
 

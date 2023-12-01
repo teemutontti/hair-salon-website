@@ -14,21 +14,22 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
-        <title>Hair Salon</title>
+        <title>Lock & Luxe | Hairdresser</title>
     </head>
     <body>
         <header>
             <section>
-                <img src="img/logo_inverted.png" alt="hair logo" width="50px" height="50px" />
-                <h1>Hair Salon</h1>
+                <img src="img/logo_inverted.png" class="logo" alt="hair logo" width="50px" height="50px" />
+                <h1 class="name">Locks & Luxe</h1>
             </section>
             <button class="hamburger" id="menu-button"><span class="material-symbols-outlined">menu</span></button>
             <nav>
-                <ul id="links">
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <ul id="nav-links">
+                    <li><a href="#hero" class="nav-link">Home</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#book" class="nav-link">Book Now</a></li>
                 </ul>
             </nav>
         </header>
@@ -36,36 +37,72 @@
             <section id="hero">
                 <h2>Ready for a New Look?</h2>
                 <p>
-                    Want to be the next to experience our hair expertise. Schedule your appointment with us now and let's make
+                    Be the next to experience our hair expertise. Schedule your appointment with us now and let's make
                     your hair goals a reality.
                 </p>
-                <button><a href="#contact">Book Now!</a></button>
-            </section>
-            <section id="about">
-                <h2>ABOUT</h2>
-                <p>Hey, I'm just graduated hairdresser with a fresh new look about the hair industry.</p>
-                <p>
-                    We take pride in our reputation for creating beautiful and unforgettable hairstyles. Our clients leave our
-                    salon with smiles and condifence.
-                </p>
-                <!--TODO: Add about-->
-                <section id="gallery">
-                    <h3>GALLERY</h3>
-                    <!--TODO: Add gallery-->
-                </section>
-                <section id="reviews" style="display: none">
-                    <h3>REVIEWS</h3>
-                    <!--TODO: Add template for reviews (don't show on page)-->
-                </section>
+                <button><a href="#book">Book Now!</a></button>
             </section>
             <section id="services">
-                <h2>SERVICES</h2>
-                <!--TODO: Add services-->
+                <h2>Services</h2>
+                <ul class="service-list">
+                    <li>
+                        <div class="service haircuts">
+                            <img src="/img/service-cut.png" alt="">
+                            <h3>Haircuts</h3>
+                            <p>
+                                We are not just cutting hair, we are grafting confidence.
+                                With precision and passion, we tailor each cut to enhance you unique features.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="service styling">
+                            <img src="/img/service-styling.png" alt="">
+                            <h3>Styling</h3>
+                            <p>
+                                Hair styling is an art form for us.
+                                Whether you're seeking a sleek, modern look or a vibrant, trend-setting style,
+                                our skilled stylists are here to transform your vision into reality.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="service treatments">
+                            <img src="/img/service-treatment.png" alt="">
+                            <h3>Treatments</h3>
+                            <p>
+                                Our treatments go beyond the surface, nourishing your hair from root to tip.
+                                We offer a tailored experience designed to enhance your hair's health and radiance.
+                            </p>
+                        </div>
+                    </li>
+                </ul>
             </section>
-            <section id="contact">
-                <h2>CONTACT</h2>
+            <section id="gallery">
+                <h2>Gallery</h2>
+                <div class="gallery-container">
+                    <img src="/img/gallery-1.webp" alt="placeholder image">
+                    <img src="/img/gallery-2.webp" alt="placeholder image">
+                    <img src="/img/gallery-3.webp" alt="placeholder image">
+                </div>
+            </section>
+            <section id="reviews" style="display: none">
+                <h3>Reviews</h3>
+                <!--TODO: Add template for reviews (don't show on page)-->
+            </section>
+            <section id="about">
+                <h2>About</h2>
+                <img src="/img/hairsalon (2).jpg" alt="">
+                <h3>Welcome to Locks & Luxe</h3>
+                <p>
+                    We take pride in our reputation for creating beautiful and unforgettable hairstyles. Our main goal is that every client leaves our
+                    salon with a smile and a boost of condifence.
+                </p>
+                <!--TODO: Add about-->
+            </section>
+            <section id="book">
+                <h2 class="heading">Book Appointment</h2>
                 <section class="calendar">
-                    <h3>Schedule your appointment</h3>
                     <section class="month">
                         <button class="prev">&#10094;</button>
                         <p class="current"></p>
@@ -81,6 +118,7 @@
                         <p>Sun</p>
                     </section>
                     <section class="days"></section>
+                    <p class="loading">Loading...</p>
                     <section class="hours"></section>
                     <button class="submit">Book</button>
                 </section>
@@ -88,15 +126,15 @@
         </main>
         <footer>
             <section>
-                <h2>CONTACT INFO</h2>
+                <h2>Contact Info</h2>
                 <!--TODO: Add contact info-->
             </section>
             <section>
-                <h2>SOCIAL MEDIA</h2>
+                <h2>Social Media</h2>
                 <!--TODO: Add social media links-->
             </section>
             <section>
-                <h2>COPYRIGHT</h2>
+                <h2>Copyright</h2>
                 <!--TODO: Add copyright-->
             </section>
         </footer>

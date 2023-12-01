@@ -55,7 +55,7 @@ function setCurrentMonth(monthChange) {
 
     const month = calendar.querySelector("section.month");
     const current = month.querySelector("p.current");
-    current.innerHTML = months[currentMonth];
+    current.innerHTML = `${months[currentMonth]} ${currentYear}`;
 
     const prev = calendar.querySelector("button.prev");
     prev.addEventListener("click", handlePrevMonthClick);
@@ -119,10 +119,17 @@ function showSubmitButton() {
     submitButton.addEventListener("click", handleSubmitClick);
 }
 
+function setLoading(loading) {
+    calendar.querySelector(".loading").style.display = loading ? "block" : "none";
+    calendar.querySelector(".hours").style.visibility = loading ? "none" : "flex";
+}
+
 async function showHours(day, month, year) {
     const hours = calendar.querySelector("section.hours");
 
+    setLoading(true);
     const openingHours = await database.getOpeningHours(day, month, year);
+    setLoading(false);
 
     let [start, end] = [];
     const dayString = `${year}-${month + 1}-${day}`;
@@ -169,7 +176,6 @@ async function showHours(day, month, year) {
 function setDays() {
     const days = calendar.querySelector("section.days");
     let [row, col] = [1, firstDayOfMonth];
-    console.log(firstDayOfMonth);
 
     days.innerHTML = "";
     for (let i = 1; i <= daysInCurrentMonth; i++) {
@@ -188,7 +194,6 @@ function setDays() {
         // Setting the days to match weekdays
         newDayItem.style.gridRow = `${row} / ${row + 1}`;
         newDayItem.style.gridColumn = `${col} / ${col + 1}`;
-        console.log("day", i, "row", row, "col", col);
         newDayItem.addEventListener("click", handleDayClick);
 
         if (col === 7) {
