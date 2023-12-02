@@ -6,30 +6,39 @@
     --black: #1d1d1d;
     --white: #fffcff;
     --gray: rgb(150, 150, 150);
-
-    font-size: 16px;
 }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     width: 100%;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
 }
 
 body {
     background-color: var(--white);
     font-family: "Raleway", sans-serif;
-
 }
 
 h1 {
     font-family: "Playfair Display", serif;
 }
 
-h2, h3, h4, h5, h6 {
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "Raleway", sans-serif;
 }
 
@@ -42,7 +51,12 @@ ul {
     padding: 0;
 }
 
-#hero, #services, #gallery, #reviews, #about, #book {
+#hero,
+#services,
+#gallery,
+#reviews,
+#about,
+#book {
     text-align: center;
 }
 
@@ -131,7 +145,6 @@ main {
     background-image: url("../img/cta_main_image_4.jpg");
     background-size: cover;
     padding: 2rem;
-
 }
 
 #hero h2 {
@@ -177,10 +190,9 @@ main {
 #book {
     background-color: var(--black);
     padding: 2rem;
-
 }
 #book .heading {
-    color: var(--white)
+    color: var(--white);
 }
 .calendar {
     align-items: center;
@@ -197,7 +209,8 @@ main {
     gap: 1rem;
     justify-content: center;
 }
-.month .prev, .month .next {
+.month .prev,
+.month .next {
     background: none;
     border: none;
     color: var(--main-color-light);
@@ -208,14 +221,16 @@ main {
     font-weight: 600;
     width: 5rem;
 }
-.weekdays, .days {
+.weekdays,
+.days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 }
 .days {
     grid-template-rows: repeat(6, 1fr);
 }
-.weekdays p, .day {
+.weekdays p,
+.day {
     align-items: center;
     display: flex;
     height: 2.2rem;
@@ -263,7 +278,8 @@ main {
     background: none;
 }
 
-.day, .hour {
+.day,
+.hour {
     background: none;
     border-radius: 0.5rem;
     border: 0.1rem solid rgba(0, 0, 0, 0);
@@ -272,12 +288,16 @@ main {
     font-family: "Raleway", sans-serif;
     font-size: 1rem;
 }
-.days .past, .hours .reserved {
+.days .past,
+.hours .reserved {
     color: var(--gray);
     pointer-events: none;
     text-decoration: line-through;
 }
-.day:hover, .hour:hover, .day.selected, .hour.selected {
+.day:hover,
+.hour:hover,
+.day.selected,
+.hour.selected {
     border: 0.1rem solid var(--main-color-light);
     color: var(--main-color-light);
     cursor: pointer;
@@ -331,5 +351,30 @@ main {
 }
 
 #about {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+}
+#about h3 {
+    margin-top: 5rem;
+}
+#about p {
+    margin: 3rem;
+}
 
+/* Tablet */
+@media only screen and (min-width: 768px) {
+    html {
+        font-size: 18px;
+    }
+    #about {
+        flex-direction: row;
+    }
+}
+
+/* Computer */
+@media only screen and (min-width: 1024px) {
+    html {
+        font-size: 20px;
+    }
 }

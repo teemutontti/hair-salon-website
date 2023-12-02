@@ -1,7 +1,7 @@
 const development = false;
 
 const database = {
-    getOpeningHours: async (day, month, year) => {
+    getOpeningHours: async () => {
         const dRes = await fetch(
             development
                 ? "http://localhost:8080/schedule/default"
@@ -16,7 +16,6 @@ const database = {
         );
         const eSchedule = await eRes.json();
 
-        console.log({ default: dSchedule, exceptions: eSchedule });
         return { default: dSchedule, exceptions: eSchedule };
     },
     getReservations: async (dayStr) => {

@@ -16,13 +16,13 @@ const months = {
     11: "December",
 };
 const weekdays = {
+    0: "sunday",
     1: "monday",
     2: "tuesday",
     3: "wednesday",
     4: "thursday",
     5: "friday",
     6: "saturday",
-    7: "sunday",
 };
 const today = new Date();
 
@@ -128,11 +128,13 @@ async function showHours(day, month, year) {
     const hours = calendar.querySelector("section.hours");
 
     setLoading(true);
-    const openingHours = await database.getOpeningHours(day, month, year);
+    const openingHours = await database.getOpeningHours();
+    console.log("opening hours: ", openingHours);
     setLoading(false);
 
     let [start, end] = [];
     const dayString = `${year}-${month + 1}-${day}`;
+    console.log(dayString);
 
     // Check if there are exception opening hours for the day
     // if not use default hours
@@ -140,7 +142,7 @@ async function showHours(day, month, year) {
         start = openingHours.exceptions[dayString].start;
         end = openingHours.exceptions[dayString].end;
     } else {
-        const dayNumber = new Date(year, month, day).getDay();
+        let dayNumber = new Date(year, month, day).getDay();
         const weekdayStr = weekdays[dayNumber];
         openingHours.default.forEach((hour) => {
             if (hour.day.toLowerCase() === weekdayStr) {
