@@ -38,5 +38,6 @@ function formatDate(date) {
     }
     return splitDate.join("-");
 }
+const reservationLimit = 3;
 
-export {weekdays, months, formatDate, formatHour};
+export {weekdays, months, formatDate, formatHour, reservationLimit};
