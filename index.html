@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-        <title>Lock & Luxe | Hairdresser</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A website for a made up hairsalon.">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;800&family=Raleway:wght@400;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="img/logos/logo-black.webp">
+        <link rel="stylesheet" type="text/css" href="css/critical.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/carousel.css">
+        <link rel="stylesheet" type="text/css" href="css/calendar.css">
+        <title>Locks & Luxe | Hairdresser</title>
     </head>
     <body>
         <header>
             <section>
-                <img src="img/logo_inverted.png" class="logo" alt="hair logo" width="50px" height="50px" />
+                <img src="img/logos/logo-white.webp" class="logo" alt="locks & luxe logo" width="50" height="50">
                 <h1 class="name">Locks & Luxe</h1>
             </section>
             <button class="hamburger" id="menu-button"><span class="material-symbols-outlined">menu</span></button>
@@ -29,25 +28,26 @@
                     <li><a href="#services" class="nav-link">Services</a></li>
                     <li><a href="#gallery" class="nav-link">Gallery</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#book" class="nav-link">Book Now</a></li>
+                    <li><a href="#book" class="nav-link book-link">Book Now</a></li>
+                    <li><a href="#contact" class="nav-link">Contact Us</a></li>
                 </ul>
             </nav>
         </header>
         <main>
             <section id="hero">
-                <h2>Ready for a New Look?</h2>
+                <h1>Ready for a New Look?</h1>
                 <p>
-                    Be the next to experience our hair expertise. Schedule your appointment with us now and let's make your hair
+                    Be the next to experience our hair expertise.<br>Schedule your appointment with us now and let's make your hair
                     goals a reality.
                 </p>
-                <button><a href="#book">Book Now!</a></button>
+                <a href="#book">Book Now!</a>
             </section>
             <section id="services">
                 <h2>Services</h2>
                 <ul class="service-list">
                     <li>
                         <div class="service haircuts">
-                            <img src="/img/service-cut.png" alt="" />
+                            <img src="img/icons/haircut.webp" alt="haircutting" width="50" height="50">
                             <h3>Haircuts</h3>
                             <p>
                                 We are not just cutting hair, we are grafting confidence. With precision and passion, we tailor
@@ -57,7 +57,7 @@
                     </li>
                     <li>
                         <div class="service styling">
-                            <img src="/img/service-styling.png" alt="" />
+                            <img src="img/icons/styling.webp" alt="hair styling" width="50" height="50">
                             <h3>Styling</h3>
                             <p>
                                 Hair styling is an art form for us. Whether you're seeking a sleek, modern look or a vibrant,
@@ -67,7 +67,7 @@
                     </li>
                     <li>
                         <div class="service treatments">
-                            <img src="/img/service-treatment.png" alt="" />
+                            <img src="img/icons/treatment.webp" alt="hair treatment" width="50" height="50">
                             <h3>Treatments</h3>
                             <p>
                                 Our treatments go beyond the surface, nourishing your hair from root to tip. We offer a tailored
@@ -78,11 +78,18 @@
                 </ul>
             </section>
             <section id="gallery">
-                <h2>Gallery</h2>
-                <div class="gallery-container">
-                    <img src="/img/gallery-1.webp" alt="placeholder image" />
-                    <img src="/img/gallery-2.webp" alt="placeholder image" />
-                    <img src="/img/gallery-3.webp" alt="placeholder image" />
+                <h2 class="heading">Gallery</h2>
+                <div class="carousel">
+                    <button class="prev">&#10094;</button>
+                    <div class="images">
+                        <img src="img/gallery/1.webp" alt="" width="234" height="312">
+                        <img src="img/gallery/2.webp" alt="" width="234" height="312">
+                        <img src="img/gallery/3.webp" alt="" width="234" height="312">
+                        <img src="img/gallery/4.webp" class="lazy-load" alt="" width="234" height="312">
+                        <img src="img/gallery/5.webp" class="lazy-load" alt="" width="234" height="312">
+                        <img src="img/gallery/6.webp" class="lazy-load" alt="" width="234" height="312">
+                    </div>
+                    <button class="next">&#10095;</button>
                 </div>
             </section>
             <section id="reviews" style="display: none">
@@ -90,46 +97,82 @@
                 <!--TODO: Add template for reviews (don't show on page)-->
             </section>
             <section id="about">
-                <img src="/img/hairsalon (2).jpg" alt="" />
-                <h3>Welcome to Locks & Luxe</h3>
-                <p>
-                    Let us tell you a little bit about ourselves. We take pride in our reputation for creating beautiful and
-                    unforgettable hairstyles. Our main goal is that every client leaves our salon with a smile and a boost of
-                    condifence.
-                </p>
-                <!--TODO: Add about-->
+                <img src="img/hairsalon.webp" alt="hairsalon with three pink seats" width="50" height="50">
+                <div class="content">
+                    <h2>About us</h2>
+                    <h3>Welcome to Locks & Luxe</h3>
+                    <p>
+                        Let us tell you a little bit about ourselves. We take pride in our reputation for creating beautiful and
+                        unforgettable hairstyles. Our main goal is that every client leaves our salon with a smile and a boost of
+                        condifence.
+                    </p>
+                </div>
             </section>
             <section id="book">
                 <h2 class="heading">Book Appointment</h2>
-                <section class="calendar">
-                    <section class="month">
-                        <button class="prev">&#10094;</button>
-                        <p class="current"></p>
-                        <button class="next">&#10095;</button>
-                    </section>
-                    <section class="weekdays">
-                        <p>Mon</p>
-                        <p>Tue</p>
-                        <p>Wed</p>
-                        <p>Thu</p>
-                        <p>Fri</p>
-                        <p>Sat</p>
-                        <p>Sun</p>
-                    </section>
-                    <section class="days"></section>
-                    <p class="loading">Loading...</p>
-                    <section class="hours"></section>
-                    <button class="submit">Book</button>
-                </section>
+                <div class="calendar">
+                    <div class="left">
+                        <div class="month">
+                            <button class="prev">&#10094;</button>
+                            <p class="current"></p>
+                            <button class="next">&#10095;</button>
+                        </div>
+                        <div class="weekdays">
+                            <p>Mon</p>
+                            <p>Tue</p>
+                            <p>Wed</p>
+                            <p>Thu</p>
+                            <p>Fri</p>
+                            <p>Sat</p>
+                            <p>Sun</p>
+                        </div>
+                        <div class="days"></div>
+                        <p class="status"></p>
+                    </div>
+                    <div class="right">
+                        <div class="hours"></div>
+                    </div>
+                </div>
+                <button class="submit">Book</button>
+            </section>
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>If you have any questions or just want to give us a review, feel free to leave your thoughts here!</p>
+                <form action="/" class="contact-form" method="post">
+                    <input type="text" name="first-name" id="first-name" placeholder="First name" required>
+                    <input type="text" name="last-name" id="last-name" placeholder="Last name">
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Write your message..." required></textarea>
+                    <input type="submit" id="submit">
+                </form>
             </section>
         </main>
         <footer>
-            <section class="info">
-                <h2>Info</h2>
-                <!--TODO: Add contact info-->
-            </section>
+            <div class="physical">
+                <p>
+                    <span class="street">Hiuskiilteenkatu 26</span><br>
+                    <span class="postcode">33000, Tampere</span><br>
+                    <span class="phone">+358 45 1234 567</span><br>
+                    <span class="email">help@locksandluxe.com</span>
+                </p>
+            </div>
+            <img src="img/logos/logo-black.webp" alt="locks & luxe logo" class="logo" width="35" height="35">
+            <div class="social-media">
+                <a href="https://www.facebook.com/">
+                    <img src="img/logos/facebook.webp" alt="facebook logo" width="35" height="35">
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/">
+                    <img src="img/logos/instagram.webp" alt="instagram logo" width="35" height="35">
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.tiktok.com/">
+                    <img src="img/logos/tiktok.webp" alt="tiktok logo" width="35" height="35">
+                    <span>TikTok</span>
+                </a>
+            </div>
         </footer>
-        <script src="scripts/index.js"></script>
+        <script src="scripts/index.js" defer></script>
         <script src="scripts/calendar.js" type="module"></script>
+        <script src="scripts/carousel.js" type="module"></script>
     </body>
 </html>

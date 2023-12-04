@@ -5,10 +5,17 @@ menuButton.addEventListener("click", () => {
     const links = document.getElementById("nav-links");
     if (icon.innerHTML == "menu") {
         icon.innerHTML = "close";
-        links.style.display = "block";
+        links.style.display = "flex";
     } else {
         icon.innerHTML = "menu";
         links.style.display = "none";
     }
 });
 
+document.addEventListener("scroll", () => {
+    if (window.scrollY > 650) {
+        document.querySelector(".nav-link.book-link").style.display = "block";
+    } else {
+        document.querySelector(".nav-link.book-link").style.display = "none";
+    }
+})

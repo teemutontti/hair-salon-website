@@ -1,54 +1,39 @@
 const development = false;
 
 const database = {
-    getOpeningHours: async () => {
-        const dRes = await fetch(
-            development
-                ? "http://localhost:8080/schedule/default"
-                : "https://hair-salon-website-backend.onrender.com/schedule/default"
-        );
+    getData: async () => {
+        // Opening hours (default)
+        const dRes = await fetch("https://hair-salon-website-backend.onrender.com/schedule/default");
         const dSchedule = await dRes.json();
+        localStorage.setItem("schedule_default", JSON.stringify(dSchedule));
 
-        const eRes = await fetch(
-            development
-                ? "http://localhost:8080/schedule/exception"
-                : "https://hair-salon-website-backend.onrender.com/schedule/exception"
-        );
+        // Opening hours (exceptions)
+        const eRes = await fetch("https://hair-salon-website-backend.onrender.com/schedule/exception");
         const eSchedule = await eRes.json();
+        localStorage.setItem("schedule_exceptions", JSON.stringify(eSchedule));
 
-        return { default: dSchedule, exceptions: eSchedule };
-    },
-    getReservations: async (dayStr) => {
-        const request = await fetch(
-            development ? "http://localhost:8080/reservations" : "https://hair-salon-website-backend.onrender.com/reservations"
-        );
-        const data = await request.json();
-
-        const reservations = [];
-        data.forEach((reservation) => {
-            if (reservation.date === dayStr) {
-                reservations.push(reservation.time);
-            }
-        });
-        console.log("reservations:", reservations);
-        return reservations;
+        // Reservations
+        const request = await fetch("https://hair-salon-website-backend.onrender.com/reservations");
+        const reservations = await request.json();
+        localStorage.setItem("reservations", JSON.stringify(reservations));
     },
     saveReservation: async (dayStr, hourStr) => {
-        const reqBody = {
-            date: dayStr,
-            time: hourStr,
-        };
         const request = await fetch(
-            development ? "http://localhost:8080/reservations" : "https://hair-salon-website-backend.onrender.com/reservations",
+            "https://hair-salon-website-backend.onrender.com/reservations",
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(reqBody),
+                body: JSON.stringify(
+                    {
+                        date: dayStr,
+                        time: hourStr,
+                    }
+                ),
             }
         );
-        console.log("reqBody: ", reqBody);
+        return request.ok;
     },
 };
 

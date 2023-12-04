@@ -1,29 +1,20 @@
 import database from "./database.js";
+import { weekdays, months, formatDate, formatHour } from "./utilities.js";
+
+async function getDatabaseData() {
+    setCalendarStatusText("Loading...");
+    await database.getData();
+
+    //Logs
+    console.log("Default schedule fetched: ", JSON.parse(localStorage.getItem("schedule_default")));
+    console.log("Exception schedule fetched: ", JSON.parse(localStorage.getItem("schedule_exceptions")));
+    console.log("Reservations fetched: ", JSON.parse(localStorage.getItem("reservations")));
+
+    setCalendarStatusText("");
+    return;
+}
 
 const calendar = document.querySelector(".calendar");
-const months = {
-    0: "January",
-    1: "February",
-    2: "March",
-    3: "April",
-    4: "May",
-    5: "June",
-    6: "July",
-    7: "August",
-    8: "September",
-    9: "October",
-    10: "November",
-    11: "December",
-};
-const weekdays = {
-    0: "sunday",
-    1: "monday",
-    2: "tuesday",
-    3: "wednesday",
-    4: "thursday",
-    5: "friday",
-    6: "saturday",
-};
 const today = new Date();
 
 let [currentDay, currentMonth, currentYear] = [null, null, null];
@@ -42,7 +33,6 @@ function setCurrentMonth(monthChange) {
     if (currentDate.getMonth() === today.getMonth()) {
         currentDate = today;
     }
-    console.log(currentDate);
 
     currentDay = currentDate.getDate();
     currentMonth = currentDate.getMonth();
@@ -53,7 +43,7 @@ function setCurrentMonth(monthChange) {
         firstDayOfMonth = 7;
     }
 
-    const month = calendar.querySelector("section.month");
+    const month = calendar.querySelector(".month");
     const current = month.querySelector("p.current");
     current.innerHTML = `${months[currentMonth]} ${currentYear}`;
 
@@ -66,117 +56,8 @@ function setCurrentMonth(monthChange) {
     setDays();
 }
 
-function handleDayClick(e) {
-    const days = document.querySelector("section.days");
-    days.querySelectorAll(".day").forEach((day) => {
-        day.classList.remove("selected");
-    });
-    e.target.classList.add("selected");
-    selectedDay = `${currentYear}-${currentMonth + 1}-${e.target.value}`;
-
-    showHours(e.target.value, currentMonth, currentYear);
-}
-
-function handleHourClick(e) {
-    const hours = calendar.querySelector("section.hours");
-    hours.querySelectorAll(".hour").forEach((hour) => {
-        hour.classList.remove("selected");
-    });
-    e.target.classList.add("selected");
-    selectedHour = formatHour(e.target.value);
-}
-
-function handleSubmitClick(e) {
-    if (selectedDay != "" && selectedHour != "") {
-        console.log(selectedDay, selectedHour);
-        database.saveReservation(selectedDay, selectedHour);
-    } else {
-        console.log("Not selected");
-    }
-}
-
-function handlePrevMonthClick(e) {
-    console.log("prev");
-    setCurrentMonth(-1);
-}
-
-function handleNextMonthClick(e) {
-    console.log("next");
-    setCurrentMonth(1);
-}
-
-function formatHour(hour) {
-    if (hour < 10) {
-        return `0${hour}:00`;
-    } else {
-        return `${hour}:00`;
-    }
-}
-
-function showSubmitButton() {
-    const submitButton = calendar.querySelector("button.submit");
-    submitButton.style.display = "block";
-    submitButton.addEventListener("click", handleSubmitClick);
-}
-
-function setLoading(loading) {
-    calendar.querySelector(".loading").style.display = loading ? "block" : "none";
-    calendar.querySelector(".hours").style.visibility = loading ? "none" : "flex";
-}
-
-async function showHours(day, month, year) {
-    const hours = calendar.querySelector("section.hours");
-
-    setLoading(true);
-    const openingHours = await database.getOpeningHours();
-    console.log("opening hours: ", openingHours);
-    setLoading(false);
-
-    let [start, end] = [];
-    const dayString = `${year}-${month + 1}-${day}`;
-    console.log(dayString);
-
-    // Check if there are exception opening hours for the day
-    // if not use default hours
-    if (dayString in openingHours.exceptions) {
-        start = openingHours.exceptions[dayString].start;
-        end = openingHours.exceptions[dayString].end;
-    } else {
-        let dayNumber = new Date(year, month, day).getDay();
-        const weekdayStr = weekdays[dayNumber];
-        openingHours.default.forEach((hour) => {
-            if (hour.day.toLowerCase() === weekdayStr) {
-                start = hour.start_time;
-                end = hour.end_time;
-            }
-        });
-    }
-
-    hours.innerHTML = "";
-    const reservations = await database.getReservations(dayString);
-    for (let i = parseInt(start); i < parseInt(end); i++) {
-        // Create new element with the hours
-        const newHourButton = document.createElement("button");
-        newHourButton.innerHTML = `${i}:00 - ${i + 1}:00`;
-        newHourButton.value = i;
-
-        // Add class names, add "reserved" tag if reserved
-        newHourButton.classList.add("hour");
-        if (reservations != null) {
-            const hour = formatHour(i);
-            if (reservations.includes(hour)) {
-                newHourButton.classList.add("reserved");
-            }
-        }
-        newHourButton.addEventListener("click", handleHourClick);
-        hours.append(newHourButton);
-    }
-    hours.style.display = "flex";
-    showSubmitButton();
-}
-
 function setDays() {
-    const days = calendar.querySelector("section.days");
+    const days = calendar.querySelector(".days");
     let [row, col] = [1, firstDayOfMonth];
 
     days.innerHTML = "";
@@ -207,5 +88,125 @@ function setDays() {
         days.append(newDayItem);
     }
 }
+async function showHours(day, month, year) {
+    const hours = calendar.querySelector(".hours");
 
+    const defaultSchedule = JSON.parse(localStorage.getItem("schedule_default"));
+    const exceptionSchedule = JSON.parse(localStorage.getItem("schedule_exceptions"));
+
+    let [start, end] = [];
+    const dayString = `${year}-${month + 1}-${day}`;
+
+    // Check if there are exception opening hours for the day
+    // if not use default hours
+    const formattedDayString = formatDate(dayString);
+    const currentDaysExceptionSchedule = exceptionSchedule
+    .filter(schedule => schedule.day === formattedDayString)
+    .map(schedule => {
+        start = schedule.start_time,
+            end = schedule.end_time
+        });
+        let dayNumber = new Date(year, month, day).getDay();
+        const weekdayStr = weekdays[dayNumber];
+        if (currentDaysExceptionSchedule.length === 0) {
+            defaultSchedule.forEach((hour) => {
+                if (hour.day.toLowerCase() === weekdayStr) {
+                    start = hour.start_time;
+                end = hour.end_time;
+            }
+        });
+    }
+    start === end
+    ? setCalendarStatusText("Closed")
+    : setCalendarStatusText("");
+
+    hours.innerHTML = "";
+    const reservations = JSON.parse(localStorage.getItem("reservations"));
+    const currentDaysReservationTimes = reservations
+    .filter(reservation => reservation.date === dayString)
+    .map(reservation => reservation.time);
+    for (let i = parseInt(start); i < parseInt(end); i++) {
+        // Create new element with the hours
+        const newHourButton = document.createElement("button");
+        newHourButton.innerHTML = `${i}:00 - ${i + 1}:00`;
+        newHourButton.value = i;
+
+        // Add class names, add "reserved" tag if reserved
+        newHourButton.classList.add("hour");
+        if (currentDaysReservationTimes != null) {
+            const hour = formatHour(i);
+            if (currentDaysReservationTimes.includes(hour)) {
+                newHourButton.classList.add("reserved");
+            }
+        }
+        newHourButton.addEventListener("click", handleHourClick);
+        hours.append(newHourButton);
+    }
+    hours.style.display = "flex";
+}
+
+function showSubmitButton() {
+    const submitButton = document.querySelector("#book button.submit");
+    submitButton.style.display = "block";
+    submitButton.addEventListener("click", handleSubmitClick);
+}
+
+function handleDayClick(e) {
+    const submitButton = document.querySelector("#book button.submit");
+    submitButton.style.display = "none";
+
+    const days = document.querySelector(".days");
+    days.querySelectorAll(".day").forEach((day) => {
+        day.classList.remove("selected");
+    });
+    e.target.classList.add("selected");
+    selectedDay = `${currentYear}-${currentMonth + 1}-${e.target.value}`;
+
+    showHours(e.target.value, currentMonth, currentYear);
+}
+function handleHourClick(e) {
+    const hours = calendar.querySelector(".hours");
+    hours.querySelectorAll(".hour").forEach((hour) => {
+        hour.classList.remove("selected");
+    });
+    e.target.classList.add("selected");
+    selectedHour = formatHour(e.target.value);
+
+    showSubmitButton();
+}
+function handleSubmitClick(e) {
+    if (selectedDay != "" && selectedHour != "") {
+        // Saving to localStorage
+        const reservations = JSON.parse(localStorage.getItem("reservations"));
+        reservations.push({date: selectedDay, time: selectedHour})
+        localStorage.setItem("reservations", JSON.stringify(reservations))
+
+        // Saving to database
+        const saveSuccessful = database.saveReservation(selectedDay, selectedHour);
+        if (saveSuccessful) {
+            calendar.querySelector(".hours").style.display = "none";
+            const submitButton = document.querySelector("#book button.submit");
+            submitButton.style.display = "none";
+            setCalendarStatusText(`Appointment booked!`)
+        }
+    } else {
+        setCalendarStatusText("Select a date and a time");
+    }
+}
+function handlePrevMonthClick(e) {
+    calendar.querySelector(".hours").style.display = "none";
+    setCurrentMonth(-1);
+}
+function handleNextMonthClick(e) {
+    calendar.querySelector(".hours").style.display = "none";
+    setCurrentMonth(1);
+}
+
+function setCalendarStatusText(text) {
+    calendar.querySelector(".status").innerHTML = text
+    calendar.querySelector(".status").style.display = text === "" ? "none" : "block";
+    calendar.querySelector(".hours").style.visibility = text === "" ? "flex" : "none";
+}
+
+getDatabaseData();
 setCurrentMonth(0);
