@@ -1,7 +1,9 @@
 import database from "./database.js";
-import { weekdays, months, formatDate, formatHour } from "./utilities.js";
+import { weekdays, months, formatDate, formatHour, reservationLimit } from "./utilities.js";
 
 async function getDatabaseData() {
+    localStorage.setItem("reservationCount", "0");
+
     setCalendarStatusText("Loading...");
     await database.getData();
 
@@ -11,6 +13,7 @@ async function getDatabaseData() {
     console.log("Reservations fetched: ", JSON.parse(localStorage.getItem("reservations")));
 
     setCalendarStatusText("");
+
     return;
 }
 
@@ -176,18 +179,27 @@ function handleHourClick(e) {
 }
 function handleSubmitClick(e) {
     if (selectedDay != "" && selectedHour != "") {
-        // Saving to localStorage
-        const reservations = JSON.parse(localStorage.getItem("reservations"));
-        reservations.push({date: selectedDay, time: selectedHour})
-        localStorage.setItem("reservations", JSON.stringify(reservations))
+        let reservationCount = parseInt(localStorage.getItem("reservationCount"));
+        reservationCount += 1;
+        localStorage.setItem("reservationCount", `${reservationCount}`);
 
-        // Saving to database
-        const saveSuccessful = database.saveReservation(selectedDay, selectedHour);
-        if (saveSuccessful) {
-            calendar.querySelector(".hours").style.display = "none";
-            const submitButton = document.querySelector("#book button.submit");
-            submitButton.style.display = "none";
-            setCalendarStatusText(`Appointment booked!`)
+        console.log(parseInt(localStorage.getItem("reservationCount")))
+        if (parseInt(localStorage.getItem("reservationCount")) < reservationLimit) {
+            // Saving to localStorage
+            const reservations = JSON.parse(localStorage.getItem("reservations"));
+            reservations.push({date: selectedDay, time: selectedHour})
+            localStorage.setItem("reservations", JSON.stringify(reservations))
+
+            // Saving to database
+            const saveSuccessful = database.saveReservation(selectedDay, selectedHour);
+            if (saveSuccessful) {
+                calendar.querySelector(".hours").style.display = "none";
+                const submitButton = document.querySelector("#book button.submit");
+                submitButton.style.display = "none";
+                setCalendarStatusText(`Appointment booked.`)
+            }
+        } else {
+            setCalendarStatusText("Reservation count exceeded.")
         }
     } else {
         setCalendarStatusText("Select a date and a time");
