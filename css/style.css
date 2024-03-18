@@ -1,0 +1,304 @@
+#book {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black);
+    padding: 4rem;
+}
+#book .heading {
+    margin-bottom: 3rem;
+}
+
+#gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    background-color: var(--black);
+    margin: 0rem;
+    padding: 4rem 0rem;
+}
+#gallery .heading {
+    margin-bottom: 5rem;
+}
+
+
+#services {
+    margin: 3rem;
+}
+
+.service-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3.5rem;
+}
+.service {
+    max-width: 35rem;
+}
+.service h3 {
+    color: var(--main-color-dark);
+}
+.service img {
+    width: 5rem;
+    height: auto;
+}
+
+
+#about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#about img {
+    width: 100%;
+    height: 50%;
+}
+#about p {
+    margin: 1rem 2rem;
+}
+#about .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+}
+#contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 2rem;
+}
+.contact-form input, .contact-form textarea{
+    display: block;
+    padding: 0.4rem 0.51rem;
+    border: 0.1rem solid var(--main-color-dark);
+    border-radius: 0.15rem;
+    color: var(--black);
+    font-family: "Raleway", sans-serif;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: var(--main-color-dark-opacity);
+}
+.contact-form input:focus, .contact-form textarea:focus {
+    border: 0.15rem solid var(--main-color-dark);
+    outline: none;
+}
+.contact-form textarea {
+    min-width: 12rem;
+    max-width: 13rem;
+    min-height: 3rem;
+    max-height: 15rem;
+    width: 12rem;
+    height: 3rem;
+}
+.contact-form input[type="submit"] {
+    margin-top: 1rem;
+    background-color: var(--main-color-light);
+    border: 0.12rem solid var(--main-color-dark);
+    border-radius: 0.15rem;
+    color: var(--main-color-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 4rem;
+    margin-top: 4rem;
+    background-color: var(--main-color-neutral);
+    box-shadow: 0rem -0.03rem 0.5rem rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+footer .logo {
+    opacity: 15%;
+    display: none;
+}
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+}
+.social-media a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--black);
+}
+.social-media a span {
+    margin-left: 0.3rem;
+    display: none;
+}
+.social-media img {
+    width: 1.7rem;
+    height: auto;
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) {
+    #hero {
+        padding: 5rem 2rem;
+    }
+    #hero h1 {
+        font-size: 4rem;
+    }
+    .hours {
+        padding: 0rem 5rem;
+    }
+    footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    footer .logo {
+        display: block;
+    }
+    .physical {
+        text-align: left;
+    }
+    .social-media {
+        flex-direction: column;
+    }
+    .social-media a {
+        width: 10rem;
+        justify-content: right;
+    }
+    .social-media a span {
+        display: block;
+    }
+    .carousel .images {
+        justify-content: center;
+        min-width: 35rem;
+    }
+    .carousel button.prev {
+        margin-right: 1rem;
+    }
+    .carousel button.next {
+        margin-left: 1rem;
+    }
+    .contact-form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 22rem;
+        justify-content: center;
+    }
+    .contact-form textarea {
+        max-width: 22rem;
+        width: 22rem;
+        height: 6rem;
+    }
+    .contact-form input {
+        width: 10.8rem;
+    }
+    #about {
+        flex-direction: row;
+    }
+    #about img {
+        width: 60%;
+    }
+    #about .content {
+        padding: 0;
+    }
+}
+
+/* Computer */
+@media only screen and (min-width: 1024px) {
+    html {
+        font-size: 18px;
+    }
+    .hamburger {
+        display: none;
+    }
+    #nav-links {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: right;
+        top: 0;
+    }
+    #nav-links li {
+        padding: 0.5rem;
+        border: 0.1rem solid rgba(0, 0, 0, 0);
+        width: auto;
+    }
+    #nav-links li:hover {
+        background: none;
+    }
+    #nav-links li:hover a {
+        background: none;
+        color: var(--white);
+        border-color: var(--main-color-dark);
+    }
+    .nav-link {
+        color: var(--white);
+        padding: 0.5rem 0.8rem;
+    }
+    .nav-link.book-link {
+        background-color: var(--main-color-bright);
+    }
+    header nav {
+        position:initial;
+        background: none;
+        width: 40rem;
+        margin-right: 1.5rem;
+    }
+    #hero {
+        padding: 7rem;
+    }
+    #hero h1 {
+        font-size: 5rem;
+    }
+    #hero p {
+        width: 30rem;
+    }
+    #services {
+        padding: 1rem 5rem;
+    }
+    .service-list {
+        flex-direction: row;
+        align-items: start;
+    }
+    .service {
+        width: 15rem;
+    }
+    .calendar {
+        flex-direction: row;
+    }
+    .hours {
+        padding: 0;
+        margin: 3rem 0rem 0rem 3rem;
+        max-width: 16rem;
+        justify-content: left;
+    }
+    .carousel button.prev {
+        margin-right: 2rem;
+    }
+    .carousel button.next {
+        margin-left: 2rem;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .hours {
+        margin-left: 5vw;
+    }
+    #about .content {
+        padding: 3rem;
+    }
+}

@@ -1,0 +1,110 @@
+.calendar {
+    align-items: center;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+.calendar .left, .calendar .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.month {
+    align-items: center;
+    color: var(--main-color-light);
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+.prev, .next {
+    background: none;
+    border: none;
+    color: var(--main-color-light);
+    cursor: pointer;
+}
+.month p.current {
+    font-size: 1rem;
+    font-weight: 600;
+    width: 5rem;
+}
+.weekdays, .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.days {
+    grid-template-rows: repeat(6, 1fr);
+}
+.weekdays p, .day {
+    align-items: center;
+    display: flex;
+    height: 2.2rem;
+    justify-content: center;
+    margin: 0;
+    width: 2.2rem;
+}
+
+.calendar .loading {
+    display: none;
+}
+.hours {
+    align-items: center;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0.5rem;
+}
+.hours h1 {
+    font-family: "Raleway", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.hour {
+    padding: 0.4rem 0.6rem;
+    width: 7.5rem;
+}
+.hour:hover {
+    border-color: var(--main-color-light);
+    color: var(--main-color-light);
+}
+#book button.submit {
+    background-color: var(--main-color-bright);
+    border-radius: 0.3rem;
+    border: 0.1rem solid var(--white);
+    color: var(--white);
+    display: none;
+    font-family: "Raleway", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    padding: 0.5rem 2rem;
+}
+.calendar .submit:hover {
+    background: none;
+}
+.day,
+.hour {
+    background: none;
+    border-radius: 0.5rem;
+    border: 0.1rem solid rgba(0, 0, 0, 0);
+    color: var(--white);
+    cursor: pointer;
+    font-family: "Raleway", sans-serif;
+    font-size: 1rem;
+}
+.days .past,
+.hours .reserved {
+    color: var(--gray);
+    pointer-events: none;
+    text-decoration: line-through;
+}
+.day:hover,
+.hour:hover,
+.day.selected,
+.hour.selected {
+    border: 0.1rem solid var(--main-color-light);
+    color: var(--main-color-light);
+    cursor: pointer;
+}
