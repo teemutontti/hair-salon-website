@@ -15,7 +15,14 @@ const database = {
         // Reservations
         const request = await fetch("https://hair-salon-website-backend.onrender.com/reservations");
         const reservations = await request.json();
-        localStorage.setItem("reservations", JSON.stringify(reservations));
+        const formatted = reservations.map(reservation => {
+            const hourSplit = reservation.start.split(":")
+            return {   ...reservation,
+                date: reservation.date.split("T")[0],
+                start: hourSplit[0] + ":" + hourSplit[1]
+            }
+        })
+        localStorage.setItem("reservations", JSON.stringify(formatted));
     },
     saveReservation: async (dayStr, hourStr) => {
         const request = await fetch(

@@ -15,7 +15,7 @@ app.get("/reservations", async (req, res) => {
         res.status(200).json(reservations);
     } catch (err) {
         console.error(err);
-        res.status(500).json("Error: ", err);
+        res.status(500).json(err);
     }
 });
 

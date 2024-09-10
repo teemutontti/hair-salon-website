@@ -98,7 +98,9 @@ async function showHours(day, month, year) {
     const exceptionSchedule = JSON.parse(localStorage.getItem("schedule_exceptions"));
 
     let [start, end] = [];
-    const dayString = `${year}-${month + 1}-${day}`;
+    const formattedDay = day.toString().padStart(2, "0");
+    const formattedMonth = (month + 1).toString().padStart(2, "0")
+    const dayString = `${year}-${formattedMonth}-${formattedDay}`;
 
     // Check if there are exception opening hours for the day
     // if not use default hours
@@ -125,9 +127,12 @@ async function showHours(day, month, year) {
 
     hours.innerHTML = "";
     const reservations = JSON.parse(localStorage.getItem("reservations"));
+    console.log(reservations)
+    console.log(dayString)
     const currentDaysReservationTimes = reservations
     .filter(reservation => reservation.date === dayString)
-    .map(reservation => reservation.time);
+    .map(reservation => reservation.start);
+    console.log(currentDaysReservationTimes)
     for (let i = parseInt(start); i < parseInt(end); i++) {
         // Create new element with the hours
         const newHourButton = document.createElement("button");
@@ -138,6 +143,7 @@ async function showHours(day, month, year) {
         newHourButton.classList.add("hour");
         if (currentDaysReservationTimes != null) {
             const hour = formatHour(i);
+            console.log(hour)
             if (currentDaysReservationTimes.includes(hour)) {
                 newHourButton.classList.add("reserved");
             }

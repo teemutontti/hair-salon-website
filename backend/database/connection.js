@@ -21,7 +21,7 @@ const connectionFunctions = {
     saveReservation: (body) => {
         return new Promise((resolve, reject) => {
             console.log("body", body, typeof body);
-            const sql = "INSERT INTO reservations (date, time) VALUES (?, ?)";
+            const sql = "INSERT INTO reservations (date, start) VALUES (?, ?)";
             pool.query(sql, [body.date, body.time], (err, results) => {
                 err ? reject(err) : resolve(results);
             });
