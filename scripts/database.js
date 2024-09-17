@@ -25,22 +25,17 @@ const database = {
         localStorage.setItem("reservations", JSON.stringify(formatted));
     },
     saveReservation: async (dayStr, hourStr) => {
-        const request = await fetch(
-            "https://hair-salon-website-backend.onrender.com/reservations",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(
-                    {
-                        date: dayStr,
-                        time: hourStr,
-                    }
-                ),
-            }
-        );
-        return request.ok;
+        const request = await fetch("https://hair-salon-website-backend.onrender.com", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                date: dayStr,
+                time: hourStr,
+            }),
+        });
+        return request;
     },
 };
 
