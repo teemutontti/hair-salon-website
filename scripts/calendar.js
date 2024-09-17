@@ -7,11 +7,6 @@ async function getDatabaseData() {
     setCalendarStatusText("Loading...");
     await database.getData();
 
-    //Logs
-    console.log("Default schedule fetched: ", JSON.parse(localStorage.getItem("schedule_default")));
-    console.log("Exception schedule fetched: ", JSON.parse(localStorage.getItem("schedule_exceptions")));
-    console.log("Reservations fetched: ", JSON.parse(localStorage.getItem("reservations")));
-
     setCalendarStatusText("");
 
     return;
@@ -127,12 +122,11 @@ async function showHours(day, month, year) {
 
     hours.innerHTML = "";
     const reservations = JSON.parse(localStorage.getItem("reservations"));
-    console.log(reservations)
-    console.log(dayString)
+
     const currentDaysReservationTimes = reservations
     .filter(reservation => reservation.date === dayString)
     .map(reservation => reservation.start);
-    console.log(currentDaysReservationTimes)
+
     for (let i = parseInt(start); i < parseInt(end); i++) {
         // Create new element with the hours
         const newHourButton = document.createElement("button");
@@ -143,7 +137,6 @@ async function showHours(day, month, year) {
         newHourButton.classList.add("hour");
         if (currentDaysReservationTimes != null) {
             const hour = formatHour(i);
-            console.log(hour)
             if (currentDaysReservationTimes.includes(hour)) {
                 newHourButton.classList.add("reserved");
             }
@@ -183,13 +176,12 @@ function handleHourClick(e) {
 
     showSubmitButton();
 }
-function handleSubmitClick(e) {
+async function handleSubmitClick(e) {
     if (selectedDay != "" && selectedHour != "") {
         let reservationCount = parseInt(localStorage.getItem("reservationCount"));
         reservationCount += 1;
         localStorage.setItem("reservationCount", `${reservationCount}`);
 
-        console.log(parseInt(localStorage.getItem("reservationCount")))
         if (parseInt(localStorage.getItem("reservationCount")) < reservationLimit) {
             // Saving to localStorage
             const reservations = JSON.parse(localStorage.getItem("reservations"));
@@ -197,12 +189,16 @@ function handleSubmitClick(e) {
             localStorage.setItem("reservations", JSON.stringify(reservations))
 
             // Saving to database
-            const saveSuccessful = database.saveReservation(selectedDay, selectedHour);
-            if (saveSuccessful) {
+            const response = await database.saveReservation(selectedDay, selectedHour);
+            const submitButton = document.querySelector("#book button.submit");
+            if (response.ok) {
                 calendar.querySelector(".hours").style.display = "none";
-                const submitButton = document.querySelector("#book button.submit");
                 submitButton.style.display = "none";
                 setCalendarStatusText(`Appointment booked.`)
+            } else if (response.status === 429) {
+                calendar.querySelector(".hours").style.display = "none";
+                submitButton.style.display = "none";
+                setCalendarStatusText(`Booking limit exceeded. Try again later.`, "red");
             }
         } else {
             setCalendarStatusText("Reservation count exceeded.")
@@ -220,9 +216,10 @@ function handleNextMonthClick(e) {
     setCurrentMonth(1);
 }
 
-function setCalendarStatusText(text) {
+function setCalendarStatusText(text, color = "white") {
     calendar.querySelector(".status").innerHTML = text
     calendar.querySelector(".status").style.display = text === "" ? "none" : "block";
+    calendar.querySelector(".status").style.color = color;
     calendar.querySelector(".hours").style.visibility = text === "" ? "flex" : "none";
 }
 
